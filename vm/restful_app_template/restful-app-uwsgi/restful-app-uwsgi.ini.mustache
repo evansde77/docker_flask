@@ -1,0 +1,11 @@
+[uwsgi]
+socket=127.0.0.1:3031
+uid=dofl
+gid=dofl
+home=/opt/dofl
+module=docker_flask.restful_app:build_app
+master=1
+enable-threads=true
+workers=2
+die-on-term=1
+virtualenv=/opt/dofl/venv

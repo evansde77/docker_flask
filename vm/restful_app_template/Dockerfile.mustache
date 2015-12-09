@@ -1,0 +1,50 @@
+# Use phusion/baseimage as base image. To make your builds reproducible, make
+# sure you lock down to a specific version, not to `latest`!
+# See https://github.com/phusion/baseimage-docker/blob/master/Changelog.md for
+# a list of version numbers.
+FROM phusion/baseimage:latest
+
+# Use baseimage-docker's init system.
+CMD ["/sbin/my_init"]
+
+RUN apt-get update && apt-get -y install git-core\
+    curl\
+    bzip2\
+    build-essential\
+    libssl-dev\
+    libffi-dev\
+    zlib1g-dev\
+    libbz2-dev\
+    libreadline-dev\
+    libsqlite3-dev\
+    wget\
+    llvm\
+    libncurses5-dev\
+    nginx
+
+# ...put your own build instructions here...
+
+ADD restful-app-uwsgi /etc/sv/restful-app-uwsgi
+ADD restful-app-nginx /etc/sv/restful-app-nginx
+ADD restful-app-nginx/restful-app-nginx.conf /etc/nginx/sites-available/restful-app
+RUN ln -s /etc/nginx/sites-available/restful-app /etc/nginx/sites-enabled/restful-app
+
+ADD runit_setup.sh /runit_setup.sh
+RUN . /runit_setup.sh 
+
+WORKDIR /opt/dofl
+RUN groupadd dofl
+RUN useradd -m -g dofl dofl
+RUN chown -R dofl:dofl /opt/dofl
+
+ENV HOME  /opt/dofl
+ENV PYENV_ROOT $HOME/.pyenv
+ENV PATH $PYENV_ROOT/shims:$PYENV_ROOT/bin:$PATH
+
+ADD pyenv_setup.sh /opt/dofl/pyenv_setup.sh 
+RUN . /opt/dofl/pyenv_setup.sh
+
+EXPOSE 80 8080
+
+# Clean up APT when done.
+RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*

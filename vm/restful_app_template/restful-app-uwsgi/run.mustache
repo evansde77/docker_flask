@@ -1,0 +1,13 @@
+#!/bin/sh
+
+UWSGI=/opt/dofl/venv/bin/uwsgi
+ROOT=/opt/dofl/
+PID=/opt/dofl/uwsgi.pid
+SOCKET=127.0.0.1:3031
+
+if [ -f $PID ]; then kill -9 `cat $PID`; rm $PID; fi
+
+cd $ROOT
+exec 2>&1
+source /etc/envvars
+exec chpst -u dofl $UWSGI --ini /opt/dofl/uwsgi.ini
