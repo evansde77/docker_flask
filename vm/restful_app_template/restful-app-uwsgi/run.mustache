@@ -10,4 +10,4 @@ if [ -f $PID ]; then kill -9 `cat $PID`; rm $PID; fi
 cd $ROOT
 exec 2>&1
 source /etc/envvars
-exec chpst -u dofl $UWSGI --ini /opt/dofl/uwsgi.ini
+exec chpst -u dofl $UWSGI --ini /etc/service/restful-app-uwsgi/restful-app-uwsgi.ini

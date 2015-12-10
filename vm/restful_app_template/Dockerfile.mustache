@@ -45,7 +45,7 @@ ADD pyenv_setup.sh /opt/dofl/pyenv_setup.sh
 RUN . /opt/dofl/pyenv_setup.sh
 RUN git clone git://github.com/evansde77/docker_flask.git 
 RUN . /opt/dofl/venv/bin/activate && pip install -r /opt/dofl/docker_flask/requirements.txt
-RUN cd /opt/dofl/docker_flask/ && python setup.py develop install
+RUN cd /opt/dofl/docker_flask && . /opt/dofl/venv/bin/activate && python setup.py develop install
 
 EXPOSE 80 8080
 
