@@ -1,6 +1,6 @@
 # Restful App Template 
 
-This template provides a simple docker container template for running the (https://github.com/evansde77/docker_flask/blob/master/src/docker_flask/restful_app.py)[restful_app] example under uwsgi and nginx. 
+This template provides a simple docker container template for running the [restful_app](https://github.com/evansde77/docker_flask/blob/master/src/docker_flask/restful_app.py) example under uwsgi and nginx. 
 
 ## Rendering the template 
 
@@ -16,7 +16,7 @@ dockerstache -i restful_app_template -o restful_app_image -c restful_app_templat
 ```
 
 This creates a directory called restful_app_image that contains the rendered templates. 
-To update settings in the templates such as python version, group and user names, edit (https://github.com/evansde77/docker_flask/blob/master/vm/restful_app_template/context.json)[restful_app_template/context.json] prior to running dockerstache
+To update settings in the templates such as python version, group and user names, edit  [restful_app_template/context.json](https://github.com/evansde77/docker_flask/blob/master/vm/restful_app_template/context.json) prior to running dockerstache
 
 
 ## building the image
