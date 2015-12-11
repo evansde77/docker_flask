@@ -1,3 +1,5 @@
 {
-  "python_version": "2.7.10"
+  "python_version": "2.7.10",
+  "user": "dorfl", 
+  "group" : "dorfl"
 }
