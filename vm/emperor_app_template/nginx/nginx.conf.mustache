@@ -3,12 +3,12 @@ server {
     server_tokens off;
     server_name restful_app;
 
-     location /restful {
+     location /restful/ {
          include uwsgi_params;
          uwsgi_pass 127.0.0.1:3031;
      }
 
-     location /configured {
+     location /configured/ {
         include uwsgi_params;
          uwsgi_pass 127.0.0.1:3032;
 

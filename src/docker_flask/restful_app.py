@@ -38,8 +38,7 @@ def build_app():
     """
     app = Flask(__name__)
     api = Api(app)
-    api.add_resource(API, '/docker_flask/restful_app/<argument>')
+    api.add_resource(API, '/docker_flask/<argument>')
     return app
 
 APP = build_app()
-

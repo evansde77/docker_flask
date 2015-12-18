@@ -67,7 +67,7 @@ def build_app():
     """
     app = Flask(__name__)
     api = Api(app)
-    api.add_resource(ConfigAPI, '/docker_flask/config_app/<element>')
+    api.add_resource(ConfigAPI, '/docker_flask/<element>')
     return app
 
 APP = build_app()
