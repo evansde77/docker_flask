@@ -1,0 +1,11 @@
+#!/bin/bash
+
+chmod -R a+rw /etc/sv/uwsgi-emperor/log
+chmod +x /etc/sv/uwsgi-emperor/run
+chmod +x /etc/sv/uwsgi-emperor/log/run
+chmod +x /etc/sv/nginx/run
+chmod +x /etc/sv/nginx/log/run
+chmod -R a+rw /etc/sv/nginx/log
+
+ln -s /etc/sv/uwsgi-emperor /etc/service
+ln -s /etc/sv/nginx /etc/service

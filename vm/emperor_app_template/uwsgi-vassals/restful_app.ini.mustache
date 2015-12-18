@@ -1,0 +1,11 @@
+[uwsgi]
+socket=127.0.0.1:3031
+uid={{user}}
+gid={{group}}
+home=/opt/{{user}}
+module=docker_flask.restful_app:APP
+master=1
+enable-threads=true
+workers=2
+die-on-term=1
+virtualenv=/opt/{{user}}/venv

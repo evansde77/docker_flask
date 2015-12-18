@@ -1,0 +1,57 @@
+# Use phusion/baseimage as base image. To make your builds reproducible, make
+# sure you lock down to a specific version, not to `latest`!
+# See https://github.com/phusion/baseimage-docker/blob/master/Changelog.md for
+# a list of version numbers.
+FROM phusion/baseimage:latest
+
+# Use baseimage-docker's init system.
+CMD ["/sbin/my_init"]
+
+RUN apt-get update && apt-get -y install git-core\
+    curl\
+    bzip2\
+    build-essential\
+    libssl-dev\
+    libffi-dev\
+    zlib1g-dev\
+    libbz2-dev\
+    libreadline-dev\
+    libsqlite3-dev\
+    wget\
+    llvm\
+    libncurses5-dev\
+    nginx
+
+# ...put your own build instructions here...
+
+
+ADD uwsgi-emperor /etc/sv/uwsgi-emperor
+ADD nginx /etc/sv/nginx
+ADD nginx/nginx.conf /etc/nginx/sites-available/docker-flask
+RUN ln -s /etc/nginx/sites-available/docker-flask /etc/nginx/sites-enabled/docker-flask
+
+ADD runit_setup.sh /runit_setup.sh
+RUN . /runit_setup.sh
+
+WORKDIR /opt/{{user}}
+RUN mkdir -p /opt/{{user}}/emperor/vassals
+RUN mkdir -p /opt/{{user}}/logs
+RUN groupadd {{group}}
+RUN useradd -m -g {{group}} {{user}}
+RUN chown -R {{group}}:{{user}} /opt/{{user}}
+ADD uwsgi-vassals/* /opt/{{user}}/emperor/vassals/
+
+ENV HOME  /opt/{{user}}
+ENV PYENV_ROOT $HOME/.pyenv
+ENV PATH $PYENV_ROOT/shims:$PYENV_ROOT/bin:$PATH
+
+ADD pyenv_setup.sh /opt/{{user}}/pyenv_setup.sh
+RUN . /opt/{{user}}/pyenv_setup.sh
+RUN git clone git://github.com/evansde77/docker_flask.git
+RUN . /opt/{{user}}/venv/bin/activate && pip install -r /opt/{{user}}/docker_flask/requirements.txt
+RUN cd /opt/{{user}}/docker_flask && . /opt/{{user}}/venv/bin/activate && python setup.py develop install
+
+EXPOSE 80 8080
+
+# Clean up APT when done.
+RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
