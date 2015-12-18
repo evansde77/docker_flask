@@ -1,5 +1,9 @@
 {
   "python_version": "2.7.10",
   "user": "dorfl", 
-  "group" : "dorfl"
+  "group" : "dorfl",
+  "nginxconfs": [
+    { "conf": "restful-nginx.conf" },
+    { "conf": "config-nginx.conf" }
+  ]
 }

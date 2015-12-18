@@ -27,8 +27,13 @@ RUN apt-get update && apt-get -y install git-core\
 
 ADD uwsgi-emperor /etc/sv/uwsgi-emperor
 ADD nginx /etc/sv/nginx
-ADD nginx/nginx.conf /etc/nginx/sites-available/docker-flask
-RUN ln -s /etc/nginx/sites-available/docker-flask /etc/nginx/sites-enabled/docker-flask
+
+{{#nginxconfs}}
+ADD nginx/{{conf}} /etc/nginx/sites-available/{{conf}}
+RUN ln -s /etc/nginx/sites-available/{{conf}} /etc/nginx/sites-enabled/{{conf}}
+{{/nginxconfs}}
+
+
 
 ADD runit_setup.sh /runit_setup.sh
 RUN . /runit_setup.sh
