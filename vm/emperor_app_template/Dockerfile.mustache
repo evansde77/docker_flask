@@ -59,7 +59,9 @@ RUN git clone git://github.com/evansde77/docker_flask.git
 RUN . /opt/{{user}}/venv/bin/activate && pip install -r /opt/{{user}}/docker_flask/requirements.txt
 RUN cd /opt/{{user}}/docker_flask && . /opt/{{user}}/venv/bin/activate && python setup.py develop install
 
-EXPOSE 80 8080
+{{#nginxports}}
+EXPOSE {{port}}
+{{/nginxports}}
 
 # Clean up APT when done.
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*

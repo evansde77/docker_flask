@@ -9,7 +9,7 @@ an environment variable.
 """
 import os
 import json
-from flask import Flask
+from flask import Flask, request
 from flask.ext.restful import Api, Resource
 from . import get_logger
 
@@ -55,9 +55,37 @@ class ConfigAPI(Resource):
         return {"ok": True, "element": config_value, "verb": "GET"}
 
     def post(self, element):
+        """
+        _post_
+
+        add an element to the config
+
+        """
+        LOGGER.info(u"post(element)")
+        if self.config is None:
+            return 500, {'error': "configuration could not be loaded"}
+
+        post_data = request.get_json()
+        self.config[element] = post_data
+
+        with open(CONFIG, 'w') as handle:
+            json.dump(self.config, handle)
+
         return {"ok": True, "verb": "post", "element": element}
 
     def delete(self, element):
+        """
+        deletes an element in the config
+        """
+        LOGGER.info(u"delete(element)")
+        if self.config is None:
+            return 500, {'error': "configuration could not be loaded"}
+
+        if element in self.config:
+            del self.config[element]
+
+        with open(CONFIG, 'w') as handle:
+            json.dump(self.config, handle)
         return {"ok": True, "verb": "delete", "element": element}
 
 
