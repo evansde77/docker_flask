@@ -1,0 +1,12 @@
+[uwsgi]
+socket=127.0.0.1:3032
+uid={{user}}
+gid={{group}}
+home=/opt/{{user}}
+module=docker_flask.configured_app:APP
+env = DOCKER_FLASK_APP_CONFIG=/opt/{{user}}/config/configured_app.json
+master=1
+enable-threads=true
+workers=2
+die-on-term=1
+virtualenv=/opt/{{user}}/venv
