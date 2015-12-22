@@ -45,9 +45,9 @@ RUN mkdir -p /opt/{{user}}/config
 
 RUN groupadd {{group}}
 RUN useradd -m -g {{group}} {{user}}
-RUN chown -R {{group}}:{{user}} /opt/{{user}}
 ADD uwsgi-vassals/* /opt/{{user}}/emperor/vassals/
 ADD config/* /opt/{{user}}/config/
+RUN chown -R {{group}}:{{user}} /opt/{{user}}
 
 ENV HOME  /opt/{{user}}
 ENV PYENV_ROOT $HOME/.pyenv
