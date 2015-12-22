@@ -41,7 +41,6 @@ class ConfigAPI(Resource):
     """
     def __init__(self, *args, **kwargs):
         super(ConfigAPI, self).__init__(*args, **kwargs)
-        self.config = _load_config()
 
     def get(self, element):
         """
@@ -96,6 +95,16 @@ def build_app():
     app = Flask(__name__)
     api = Api(app)
     api.add_resource(ConfigAPI, '/docker_flask/<element>')
+
+    @app.before_first_request
+    def on_load():
+        LOGGER.info("Config loaded before_first_request")
+        api.config = _load_config()
+
     return app
 
+
 APP = build_app()
+
+if __name__ == '__main__':
+    APP.run()
