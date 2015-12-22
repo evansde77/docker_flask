@@ -66,3 +66,18 @@ default   *        virtualbox   Running   tcp://192.168.99.100:2376
 curl 192.168.99.100:32793/docker_flask/restful_app/womp
 curl -X POST 192.168.99.100:32793/docker_flask/restful_app/womp
 ```
+
+
+## Configuration Updates with the Emperor 
+
+A second app runs on this container under port 8081 that provides a simple REST API to edit a config file. Config changes can be forced to be picked up using the uwsgi emperor by touching the configuration file for the vassal. 
+The source code for the configurable app can be seen [here](https://github.com/evansde77/docker_flask/blob/master/src/docker_flask/configured_app.py) and it implements a simple configuration manipulation API:
+
+ * GET - gets a given value from the config file 
+ * POST - sets a value in the config file 
+ * DELETE - removes a value from the config file 
+
+
+
+
+
