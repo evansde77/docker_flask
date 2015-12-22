@@ -76,6 +76,9 @@ The source code for the configurable app can be seen [here](https://github.com/e
  * GET - gets a given value from the config file 
  * POST - sets a value in the config file 
  * DELETE - removes a value from the config file 
+ 
+
+The config file itself is just a JSON file rendered from [a template](https://github.com/evansde77/docker_flask/blob/master/vm/emperor_app_template/config/configured_app.json.mustache)
 
 
 
