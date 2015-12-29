@@ -60,7 +60,22 @@ def _parse_request():
 class SpoolerAPI(Resource):
     """
     simple REST API that spools tasks in response to POST requests
-    and executes them once
+    and executes them once.
+
+    Example usage:
+
+    Given data.json like:
+    {
+        "feed": "http://127.0.0.1:5984/test_db/_changes"
+    }
+
+    The following curl command will run once using the
+    consume_feed call defined above.
+
+    curl -H Content-Type:application/json \
+         -X POST \
+         -d@data.json \
+         localhost:3031/docker_flask/spool_once
 
     """
     def post(self):
@@ -76,6 +91,45 @@ class ContinuousSpoolerAPI(Resource):
     REST API that spools tasks forever in response to POST
     requests, provides a GET verb to list the jobs
     and also a DELETE verb to remove jobs
+
+    Example Usage:
+
+    Given data.json like:
+    {
+        "feed": "http://127.0.0.1:5984/test_db/_changes"
+    }
+
+    The following curl command will run repeatedly using the
+    consume_feed_continuously call defined above.
+
+    curl -H Content-Type:application/json \
+         -X POST \
+         -d@data.json \
+         localhost:3031/docker_flask/spool_forever
+
+    The list of running jobs in the spooler can be seen via GET
+    to the same URL:
+
+    curl localhost:3031/docker_flask/spool_forever
+    {
+       "jobs": [
+           "/private/tmp/spooler/uwsgi_spoolfile_UUID"],
+           "ok": true
+    }
+
+    And the job ids in the list can be used to stop running jobs:
+
+    Given del.json like:
+
+    {
+        "job":"/private/tmp/spooler/uwsgi_spoolfile_UUID"
+    }
+
+    curl -X DELETE \
+         -H Content-Type:application/json \
+         -d@del.json \
+         localhost:3031/docker_flask/spool_forever
+
     """
     def get(self):
         """
