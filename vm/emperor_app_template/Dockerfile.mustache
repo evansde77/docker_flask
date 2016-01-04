@@ -19,6 +19,7 @@ RUN apt-get update && apt-get -y install git-core\
     libsqlite3-dev\
     wget\
     llvm\
+    gfortran\
     libncurses5-dev\
     nginx
 
@@ -47,6 +48,7 @@ RUN groupadd {{group}}
 RUN useradd -m -g {{group}} {{user}}
 ADD uwsgi-vassals/* /opt/{{user}}/emperor/vassals/
 ADD config/* /opt/{{user}}/config/
+ADD python-requirements.txt /opt/{{user}}/user-requirements.txt
 RUN chown -R {{group}}:{{user}} /opt/{{user}}
 
 ENV HOME  /opt/{{user}}

@@ -1,5 +1,10 @@
 {
   "python_version": "2.7.10",
+  "python_libraries": [
+     {"library": "numpy"},
+     {"library": "pandas==0.17.1"},
+     {"library": "cloudant==2.0.0a4"}
+  ],
   "user": "dorfl", 
   "group" : "dorfl",
   "nginxconfs": [

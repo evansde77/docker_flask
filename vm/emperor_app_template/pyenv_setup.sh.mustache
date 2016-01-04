@@ -7,3 +7,13 @@ pip install --upgrade pip
 pip install setuptools
 pip install virtualenv
 virtualenv /opt/{{user}}/venv
+
+USER_REQS=/opt/{{user}}/user-requirements.txt
+NUM_REQS=`cat ${USER_REQS} | wc -l`
+if [ ${NUM_REQS} -gt 0 ]; then
+  . /opt/{{user}}/venv/bin/activate
+  /opt/{{user}}/venv/bin/pip install -r ${USER_REQS}
+fi
+
+
+
