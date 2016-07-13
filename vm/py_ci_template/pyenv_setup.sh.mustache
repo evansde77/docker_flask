@@ -1,0 +1,12 @@
+#!/bin/bash
+git clone https://github.com/yyuu/pyenv.git .pyenv
+{{#python_versions}}
+pyenv install {{.}}
+{{/python_versions}}
+
+pyenv global {{#python_versions}} {{.}} {{/python_versions}}
+pyenv rehash
+
+
+
+

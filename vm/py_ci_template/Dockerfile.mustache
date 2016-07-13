@@ -43,11 +43,10 @@ WORKDIR /opt/{{user}}
 RUN mkdir -p /opt/{{user}}/emperor/vassals
 RUN mkdir -p /opt/{{user}}/logs
 RUN mkdir -p /opt/{{user}}/config
+RUN mkdir -p /opt/{{user}}/emperor/vassals/
 
 RUN groupadd {{group}}
 RUN useradd -m -g {{group}} {{user}}
-ADD uwsgi-vassals/* /opt/{{user}}/emperor/vassals/
-ADD config/* /opt/{{user}}/config/
 ADD python-requirements.txt /opt/{{user}}/user-requirements.txt
 RUN chown -R {{user}}:{{group}} /opt/{{user}}
 
@@ -57,13 +56,9 @@ ENV PATH $PYENV_ROOT/shims:$PYENV_ROOT/bin:$PATH
 
 ADD pyenv_setup.sh /opt/{{user}}/pyenv_setup.sh
 RUN . /opt/{{user}}/pyenv_setup.sh
-RUN git clone git://github.com/evansde77/docker_flask.git
-RUN . /opt/{{user}}/venv/bin/activate && pip install -r /opt/{{user}}/docker_flask/requirements.txt
-RUN cd /opt/{{user}}/docker_flask && . /opt/{{user}}/venv/bin/activate && python setup.py develop install
+ADD venv_setup.sh /opt/{{user}}/venv_setup.sh
+RUN . /opt/{{user}}/venv_setup.sh
 
-{{#nginxports}}
-EXPOSE {{port}}
-{{/nginxports}}
 
 # Clean up APT when done.
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*

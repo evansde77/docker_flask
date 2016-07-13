@@ -1,5 +1,5 @@
 Flask==0.10.1
 Flask-RESTful==0.3.4
 requests==2.7.0
-uWSGI==2.0.11.1
+uWSGI
 dockerstache==0.0.3

@@ -1,0 +1,17 @@
+{
+  "python_versions": [
+    "2.7.10",
+    "3.5.1"
+  ],
+  "python_libraries": [
+     {"library": "tox"},
+     {"library": "devpi"},
+     {"library": "nose"},
+     {"library": "coverage"},
+     {"library": "pylint"},
+     {"library": "pep8"},
+     {"library": "mock"}
+  ],
+  "user": "dorfl",
+  "group" : "golems"
+}
