@@ -1,0 +1,8 @@
+#!/bin/sh
+
+DEVPI_SERVER=/opt/{{user}}/devpi/venv/bin/devpi-server
+ROOT=/opt/{{user}}/devpi/server
+
+cd $ROOT
+exec 2>&1
+exec $DEVPI_SERVER --serverdir=${ROOT} --host=0.0.0.0 --port=4040 --start

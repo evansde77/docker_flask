@@ -1,11 +1,10 @@
 {
   "python_versions": [
-    "2.7.10",
+    "2.7.11",
     "3.5.1"
   ],
   "python_libraries": [
      {"library": "tox"},
-     {"library": "devpi"},
      {"library": "nose"},
      {"library": "coverage"},
      {"library": "pylint"},
@@ -13,5 +12,25 @@
      {"library": "mock"}
   ],
   "user": "dorfl",
-  "group" : "golems"
+  "group" : "golems",
+  "devpi": {
+        "root_password": "w0mp",
+        "users": [
+        {
+            "username": "dorfl",
+            "password": "st3v3",
+            "email": "dorfl@pbr.com",
+            "repos": ["dev"]
+        },
+        {
+            "username": "bob",
+            "password": "st3v3",
+            "email": "bob@pbr.com",
+            "repos": ["dev", "prod"]
+        }
+    ]
+  },
+  "nginxconfs": [
+    "devpi.conf"
+  ]
 }

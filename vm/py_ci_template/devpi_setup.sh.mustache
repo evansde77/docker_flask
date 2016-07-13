@@ -1,0 +1,23 @@
+#!/bin/bash
+#
+# set up devpi venv and root user
+#
+
+
+virtualenv /opt/{{user}}/devpi/venv
+. /opt/{{user}}/devpi/venv/bin/activate
+pip install devpi
+##devpi use http://0.0.0.0:80
+##devpi login root --password ''
+##devpi user -m root password={{devpi.root_password}}
+
+##{{#devpi.users}}
+##devpi user -c {{username}} password={{password}}  email={{email}}
+##devpi login {{username}} --password={{password}}
+##{{#repos}}
+##devpi index -c {{.}} bases=root/pypi
+##{{/repos}}
+##devpi logout
+##{{/devpi.users}}
+
+

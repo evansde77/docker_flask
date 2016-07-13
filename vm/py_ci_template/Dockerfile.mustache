@@ -28,11 +28,13 @@ RUN apt-get update && apt-get -y install git-core\
 
 ADD uwsgi-emperor /etc/sv/uwsgi-emperor
 ADD nginx /etc/sv/nginx
+ADD devpi /etc/sv/devpi
 
 {{#nginxconfs}}
-ADD nginx/{{conf}} /etc/nginx/sites-available/{{conf}}
-RUN ln -s /etc/nginx/sites-available/{{conf}} /etc/nginx/sites-enabled/{{conf}}
+ADD nginx/{{.}} /etc/nginx/sites-available/{{.}}
+RUN ln -s /etc/nginx/sites-available/{{.}} /etc/nginx/sites-enabled/{{.}}
 {{/nginxconfs}}
+RUN rm -f  /etc/nginx/sites-enabled/default
 
 
 
@@ -44,6 +46,9 @@ RUN mkdir -p /opt/{{user}}/emperor/vassals
 RUN mkdir -p /opt/{{user}}/logs
 RUN mkdir -p /opt/{{user}}/config
 RUN mkdir -p /opt/{{user}}/emperor/vassals/
+RUN mkdir -p /opt/{{user}}/devpi
+RUN mkdir -p /opt/{{user}}/devpi/server
+
 
 RUN groupadd {{group}}
 RUN useradd -m -g {{group}} {{user}}
@@ -58,6 +63,9 @@ ADD pyenv_setup.sh /opt/{{user}}/pyenv_setup.sh
 RUN . /opt/{{user}}/pyenv_setup.sh
 ADD venv_setup.sh /opt/{{user}}/venv_setup.sh
 RUN . /opt/{{user}}/venv_setup.sh
+ADD devpi_setup.sh /opt/{{user}}/devpi_setup.sh
+RUN . /opt/{{user}}/devpi_setup.sh
+
 
 
 # Clean up APT when done.

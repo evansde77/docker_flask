@@ -1,0 +1,20 @@
+server {
+    listen 80;
+    gzip             on;
+    gzip_min_length  2000;
+    gzip_proxied     any;
+    gzip_types       text/html application/json;
+
+    proxy_read_timeout 60s;
+    client_max_body_size 64M;
+
+    # set to where your devpi-server state is on the filesystem
+    root /opt/{{user}}/devpi/server;
+
+    location / {
+        proxy_pass http://localhost:4040;
+        proxy_set_header  X-outside-url $scheme://$host;
+        proxy_set_header  X-Real-IP $remote_addr;
+    }
+
+}

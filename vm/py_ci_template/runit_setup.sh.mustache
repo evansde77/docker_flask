@@ -6,6 +6,10 @@ chmod +x /etc/sv/uwsgi-emperor/log/run
 chmod +x /etc/sv/nginx/run
 chmod +x /etc/sv/nginx/log/run
 chmod -R a+rw /etc/sv/nginx/log
+chmod -R a+rw /etc/sv/devpi/log
+chmod +x /etc/sv/devpi/run
+chmod +x /etc/sv/devpi/log/run
 
 ln -s /etc/sv/uwsgi-emperor /etc/service
 ln -s /etc/sv/nginx /etc/service
+ln -s /etc/sv/devpi /etc/service
