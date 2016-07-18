@@ -10,11 +10,18 @@
      {"library": "pylint"},
      {"library": "pep8"},
      {"library": "mock"},
-     {"library": "uwsgi"},
-     {"library": "cirrus-cli"}
+     {"library": "uwsgi"}
   ],
   "user": "dorfl",
   "group" : "golems",
   "nginxconfs": [
+  ],
+  "runit_services": [
+    "nginx",
+    "uwsgi-emperor"
+  ],
+  "cirrus_config": [
+     {"setting": "github-username", "value": "steve"},
+     {"setting": "github-token", "value": "None"}
   ]
 }

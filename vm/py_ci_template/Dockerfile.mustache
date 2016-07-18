@@ -26,9 +26,9 @@ RUN apt-get update && apt-get -y install git-core\
 
 # ...put your own build instructions here...
 
-
-ADD uwsgi-emperor /etc/sv/uwsgi-emperor
-ADD nginx /etc/sv/nginx
+{{#runit_services}}
+ADD  {{.}} /etc/sv/{{.}}
+{{/runit_services}}
 
 {{#nginxconfs}}
 ADD nginx/{{.}} /etc/nginx/sites-available/{{.}}
@@ -49,6 +49,7 @@ RUN mkdir -p /opt/{{user}}/emperor/vassals/
 
 RUN groupadd {{group}}
 RUN useradd -m -g {{group}} {{user}}
+ADD gitconfig /opt/{{user}}/.gitconfig
 ADD python-requirements.txt /opt/{{user}}/user-requirements.txt
 RUN chown -R {{user}}:{{group}} /opt/{{user}}
 
@@ -60,7 +61,9 @@ ADD pyenv_setup.sh /opt/{{user}}/pyenv_setup.sh
 RUN . /opt/{{user}}/pyenv_setup.sh
 ADD venv_setup.sh /opt/{{user}}/venv_setup.sh
 RUN . /opt/{{user}}/venv_setup.sh
-
+ADD robot-installer.sh /opt/{{user}}/robot-installer.sh
+ADD cirrus_setup.sh /opt/{{user}}/cirrus_setup.sh
+RUN . /opt/{{user}}/cirrus_setup.sh
 
 # Clean up APT when done.
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
