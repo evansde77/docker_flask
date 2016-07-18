@@ -13,24 +13,6 @@
   ],
   "user": "dorfl",
   "group" : "golems",
-  "devpi": {
-        "root_password": "w0mp",
-        "users": [
-        {
-            "username": "dorfl",
-            "password": "st3v3",
-            "email": "dorfl@pbr.com",
-            "repos": ["dev"]
-        },
-        {
-            "username": "bob",
-            "password": "st3v3",
-            "email": "bob@pbr.com",
-            "repos": ["dev", "prod"]
-        }
-    ]
-  },
   "nginxconfs": [
-    "devpi.conf"
   ]
 }
