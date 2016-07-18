@@ -10,7 +10,8 @@
      {"library": "pylint"},
      {"library": "pep8"},
      {"library": "mock"},
-     {"library": "uwsgi"}
+     {"library": "uwsgi"},
+     {"library": "cirrus-cli"}
   ],
   "user": "dorfl",
   "group" : "golems",
