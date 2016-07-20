@@ -7,7 +7,10 @@ FROM phusion/baseimage:latest
 # Use baseimage-docker's init system.
 CMD ["/sbin/my_init"]
 
-RUN apt-get update && apt-get -y install git-core\
+RUN apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
+RUN echo "deb https://apt.dockerproject.org/repo ubuntu-xenial main" | tee /etc/apt/sources.list.d/docker.list
+
+RUN apt-get update && apt-cache policy docker-engine && apt-get -y install git-core\
     curl\
     bzip2\
     build-essential\
@@ -22,7 +25,8 @@ RUN apt-get update && apt-get -y install git-core\
     gfortran\
     libncurses5-dev\
     nano\
-    nginx
+    nginx\
+    docker-engine
 
 # ...put your own build instructions here...
 
