@@ -1,0 +1,5 @@
+#!/bin/bash 
+
+/opt/uwsgi_vassal_deployer.py --vassals=/opt/{{user}}/emperor/vassals -i /opt/{{user}}/emperor/vassal-templates --sites-available=/etc/nginx/sites-available --sites-enabled=/etc/nginx/sites-enabled
+
+/sbin/my_init 

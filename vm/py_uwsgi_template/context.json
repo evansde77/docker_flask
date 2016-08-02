@@ -1,0 +1,19 @@
+{
+  "python_versions": [
+    "2.7.11"
+  ],
+  "python_libraries": [
+     {"library": "uwsgi"}
+  ],
+  "user": "dorfl",
+  "group" : "golems",
+  "runit_services": [
+    "nginx",
+    "uwsgi-emperor",
+    "redis"
+  ],
+  "cirrus_config": [
+     {"setting": "github-username", "value": "steve"},
+     {"setting": "github-token", "value": "None"}
+  ]
+}

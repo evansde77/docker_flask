@@ -1,0 +1,12 @@
+#!/bin/sh
+
+UWSGI=/opt/{{user}}/venv/bin/uwsgi
+ROOT=/opt/{{user}}/
+PID=/opt/{{user}}/uwsgi-emperor.pid
+
+if [ -f $PID ]; then kill -9 `cat $PID`; rm $PID; fi
+
+cd $ROOT
+exec 2>&1
+exec chpst -u {{user}} $UWSGI --ini /etc/service/uwsgi-emperor/uwsgi-emperor.ini
+

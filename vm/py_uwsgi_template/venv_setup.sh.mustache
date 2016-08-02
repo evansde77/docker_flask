@@ -1,0 +1,35 @@
+#!/bin/bash
+#
+# set up each pyenv python with pip, virtualenv, setuptools
+# create a venv for each major python version and install
+# user reqs
+
+eval "$(pyenv init -)"
+PIPS=`pyenv versions --bare | cut -d. -f1,2 | sed -e 's/^/pip/'`
+
+setup_pip() {
+    local P="${1}"
+    local VERS=`echo "${1}" | sed -e 's/pip//'`
+    local VENV_NAME="venv_${VERS}"
+    echo "setting up pip ${P} for ${VERS} and venv ${VENV_NAME}"
+    ${P} install --upgrade pip
+    ${P} install setuptools
+    ${P} install virtualenv
+    eval "$(pyenv init -)"
+    virtualenv /opt/{{user}}/${VENV_NAME}
+    USER_REQS=/opt/{{user}}/user-requirements.txt
+    NUM_REQS=`cat ${USER_REQS} | wc -l`
+    if [ ${NUM_REQS} -gt 0 ]; then
+      . /opt/{{user}}/${VENV_NAME}/bin/activate
+      /opt/{{user}}/${VENV_NAME}/bin/pip install -r ${USER_REQS}
+    fi
+}
+
+
+for p in $PIPS;
+do
+    setup_pip $p
+done
+
+DEFAULT_PY=`pyenv versions --bare | head -1 | cut -d'.' -f1,2`
+ln -s /opt/{{user}}/venv_${DEFAULT_PY} /opt/{{user}}/venv

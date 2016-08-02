@@ -1,0 +1,8 @@
+#!/bin/bash
+
+{{#runit_services}}
+chmod -R a+rw /etc/sv/{{.}}/log
+chmod +x /etc/sv/{{.}}/run
+chmod +x /etc/sv/{{.}}/log/run
+ln -s /etc/sv/{{.}} /etc/service
+{{/runit_services}}

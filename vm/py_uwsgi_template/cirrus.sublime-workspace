@@ -1,0 +1,219 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"HIVE_",
+				"HIVE_DICTIFY"
+			],
+			[
+				"hive_par",
+				"hive_parameters_str"
+			],
+			[
+				"hive_conf",
+				"hive_configuration_str"
+			],
+			[
+				"hive",
+				"hive_variables_str"
+			],
+			[
+				"DATE",
+				"DATE_FORMAT_READ"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "cirrus virtualenv",
+	"command_palette":
+	{
+		"height": 392.0,
+		"selected_items":
+		[
+			[
+				"package",
+				"Package Control: Remove Package"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"pretty",
+				"Pretty JSON: Format (Pretty Print) JSON"
+			],
+			[
+				"pack",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 449.0
+	},
+	"console":
+	{
+		"height": 125.0
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/Users/devans/Documents/imc/containers/python_ci/docker_flask/vm/py_ci_template/devpi/run.mustache",
+		"/Users/devans/Documents/imc/containers/python_ci/docker_flask/vm/py_ci_template/devpi_setup.sh.mustache",
+		"/Users/devans/Documents/imc/containers/python_ci/docker_flask/vm/py_ci_template/runit_setup.sh.mustache",
+		"/Users/devans/Documents/imc/containers/python_ci/docker_flask/vm/py_ci_template/nginx/devpi.conf.mustache",
+		"/Users/devans/Documents/imc/containers/python_ci/docker_flask/vm/py_ci_template/devpi/log/run.mustache",
+		"/Users/devans/Documents/imc/containers/python_ci/docker_flask/vm/py_ci_template/venv_setup.sh.mustache.sh",
+		"/Users/devans/Documents/imc/imc_rc/tests/unit/imc_rc/tools/hive_command_tests.py",
+		"/Users/devans/Documents/imc/imc_rc/tests/unit/imc_rc/models/compliance_tests.py",
+		"/Users/devans/Documents/imc/imc_rc/tests/unit/imc_rc/models/record_tests.py",
+		"/Users/devans/Documents/imc/imc_rc/src/imc_rc/tasks/__init__.py",
+		"/Users/devans/Documents/imc/imc_rc/imc_rc.sublime-project",
+		"/Users/devans/Documents/imc/imc_rc/mongo_example.py",
+		"/Users/devans/Documents/imc/imc_rc/src/imc_rc/models/compliance.py",
+		"/Users/devans/Documents/test/sample.json",
+		"/Users/devans/.bash_profile",
+		"/Users/devans/Documents/test/schema_example.py",
+		"/Users/devans/Documents/imc/imc_rc/tests/unit/imc_rc/tools/__init__.py",
+		"/Users/devans/Documents/imc/imc_rc/src/imc_rc/tools/__init__.py",
+		"/Users/devans/Documents/imc/imc_rc/src/imc_rc/models/record.py",
+		"/Users/devans/Documents/imc/imc_rc/tests/unit/imc_rc/utils/dates_test.py",
+		"/Users/devans/Documents/imc/imc_rc/src/imc_rc/utils/dates.py",
+		"/Users/devans/Documents/imc/imc_rc/tests/unit/imc_rc/utils/dates_test.py ",
+		"/Users/devans/Documents/imc/imc_rc/tests/unit/imc_rc/utils/__init__.py",
+		"/Users/devans/Documents/imc/imc_rc/src/imc_rc/tools/beeline.py",
+		"/Users/devans/Documents/imc/imc_rc/src/imc_rc/utils/__init__.py",
+		"/Users/devans/Documents/imc/luigi/globalrisk/java/risk-compliance-system/src/main/template/risk_hadoop/skel/bin/complianceOrderScript.sh",
+		"/Users/devans/Library/Application Support/Sublime Text 2/Packages/PyCover/PyCover.sublime-settings",
+		"/Users/devans/Library/Application Support/Sublime Text 2/Packages/Default/Preferences.sublime-settings",
+		"/Users/devans/Documents/imc/imc_rc/src/imc_rc/models/compliance/__init__.py",
+		"/Users/devans/Documents/imc/imc_rc/tests/unit/imc_rc/models/__init__.py",
+		"/Users/devans/Documents/imc/imc_rc/tests/unit/imc_rc/__init__.py",
+		"/Users/devans/Documents/imc/imc_rc/tests/unit/__init__.py",
+		"/Users/devans/Documents/imc/imc_rc/tests/__init__.py",
+		"/Users/devans/Dropbox/Daves Stuff/.bash_profile",
+		"/Users/devans/Library/Application Support/Sublime Text 2/Packages/User/SublimeLinter.sublime-settings",
+		"/Users/devans/Library/Application Support/Sublime Text 2/Packages/User/Preferences.sublime-settings"
+	],
+	"find":
+	{
+		"height": 35.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"=str,",
+			"hc",
+			"python",
+			"'STRING'",
+			"', ",
+			"object",
+			"\n"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"{\"type\" : \"string\"},",
+			"str,",
+			"=",
+			"str"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 0.0
+	},
+	"input":
+	{
+		"height": 31.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 227.0
+	},
+	"replace":
+	{
+		"height": 64.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 150.0,
+	"status_bar_visible": true
+}

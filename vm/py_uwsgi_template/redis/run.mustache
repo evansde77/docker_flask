@@ -1,0 +1,8 @@
+#!/bin/sh
+
+EXEC=/usr/bin/redis-server
+
+exec 2>&1
+exec chpst -u {{user}} $EXEC
+
+

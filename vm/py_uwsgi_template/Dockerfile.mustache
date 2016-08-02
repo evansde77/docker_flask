@@ -1,0 +1,71 @@
+# Use phusion/baseimage as base image. To make your builds reproducible, make
+# sure you lock down to a specific version, not to `latest`!
+# See https://github.com/phusion/baseimage-docker/blob/master/Changelog.md for
+# a list of version numbers.
+FROM phusion/baseimage:latest
+
+# Use baseimage-docker's init system.
+CMD ["/sbin/my_init", "/opt/startup_vassals.sh"]
+
+RUN apt-get update && apt-cache policy docker-engine && apt-get -y install git-core\
+    curl\
+    bzip2\
+    build-essential\
+    libssl-dev\
+    libffi-dev\
+    zlib1g-dev\
+    libbz2-dev\
+    libreadline-dev\
+    libsqlite3-dev\
+    wget\
+    llvm\
+    gfortran\
+    libncurses5-dev\
+    redis-server\
+    nano\
+    nginx
+
+# ...put your own build instructions here...
+
+{{#runit_services}}
+ADD  {{.}} /etc/sv/{{.}}
+{{/runit_services}}
+
+RUN rm -f  /etc/nginx/sites-enabled/default
+
+ADD runit_setup.sh /runit_setup.sh
+RUN . /runit_setup.sh
+
+WORKDIR /opt/{{user}}
+RUN mkdir -p /opt/{{user}}/emperor/vassals
+RUN mkdir -p /opt/{{user}}/emperor/vassal-templates
+RUN mkdir -p /opt/{{user}}/logs
+RUN mkdir -p /opt/{{user}}/config
+RUN mkdir -p /opt/{{user}}/emperor/vassals/
+
+
+RUN groupadd {{group}}
+RUN useradd -m -g {{group}} {{user}}
+ADD gitconfig /opt/{{user}}/.gitconfig
+ADD python-requirements.txt /opt/{{user}}/user-requirements.txt
+RUN chown -R {{user}}:{{group}} /opt/{{user}}
+
+ENV HOME  /opt/{{user}}
+ENV PYENV_ROOT $HOME/.pyenv
+ENV PATH $PYENV_ROOT/shims:$PYENV_ROOT/bin:$PATH
+
+ADD pyenv_setup.sh /opt/{{user}}/pyenv_setup.sh
+RUN . /opt/{{user}}/pyenv_setup.sh
+ADD venv_setup.sh /opt/{{user}}/venv_setup.sh
+RUN . /opt/{{user}}/venv_setup.sh
+ADD robot-installer.sh /opt/{{user}}/robot-installer.sh
+ADD cirrus_setup.sh /opt/{{user}}/cirrus_setup.sh
+RUN . /opt/{{user}}/cirrus_setup.sh
+
+ADD uwsgi_vassal_deployer.py /opt/uwsgi_vassal_deployer.py
+ADD startup_vassals.sh /opt/startup_vassals.sh
+RUN chmod +x /opt/uwsgi_vassal_deployer.py
+RUN chmod +x /opt/startup_vassals.sh
+
+# Clean up APT when done.
+RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
